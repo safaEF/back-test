@@ -14,7 +14,7 @@ SECRET_KEY = 'django-insecure-d7v8^8o)k$a0b%kh)ftm+w=3kkgz=s@=w*%g9j624v85u2*@-j
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'dj_rest_auth',
+    'rest_framework_swagger',
 
     'django.contrib.sites',
     'allauth',
@@ -72,6 +73,8 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+            'libraries' : {
+                'staticfiles': 'django.templatetags.static', }
         },
     },
 ]
@@ -125,6 +128,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
+MEDIA_URL='/media/'
+MEDIA_ROOT='/mediafolder/'
+STATIC_ROOT='/staticfolder/' 
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
@@ -142,8 +148,9 @@ REST_AUTH_REGISTER_SERIALIZERS = {
 }
 
 REST_FRAMEWORK = {
+    'DEFAULT_SCHEMA_CLASS':'rest_framework.schemas.coreapi.AutoSchema',
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
-
+     
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
         'rest_framework.authentication.SessionAuthentication',
@@ -199,3 +206,10 @@ ACCOUNT_EMAIL_VERIFICATION = 'none'
 ACCOUNT_AUTHENTICATION_METHOD = 'username'
 
 ACCOUNT_EMAIL_REQUIRED = False
+
+SWAGGER_SETTINGS = {
+   
+    'JSON_EDITOR':True,
+    'SHOW_REQUEST_HEADERS':True
+    
+} 

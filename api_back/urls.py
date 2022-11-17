@@ -4,10 +4,13 @@ from django.contrib import admin
 from django.conf import settings
 from django.urls import path, include
 from django.conf.urls.static import static
+from rest_framework_swagger.views import get_swagger_view
 
 from product.views import *
 from .views import  *
 from orders.views import *
+schema_view = get_swagger_view(title='docs for tests')
+
 
 router = routers.DefaultRouter()
 
@@ -44,5 +47,6 @@ urlpatterns = [
     path('chart/', ChartAPIView.as_view()),
     #path('login', login, name="login_view"),
     path('authentification/', include('dj_rest_auth.urls')),
-    path('authentification/registration/',include('dj_rest_auth.registration.urls'))
+    path('authentification/registration/',include('dj_rest_auth.registration.urls')),
+    path('docs',schema_view)
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
