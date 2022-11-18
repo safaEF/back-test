@@ -1,16 +1,18 @@
 
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+    TokenVerifyView
+)
 from rest_framework import routers
 from django.contrib import admin
 from django.conf import settings
 from django.urls import path, include
 from django.conf.urls.static import static
-from rest_framework_swagger.views import get_swagger_view
 
 from product.views import *
 from .views import  *
 from orders.views import *
-schema_view = get_swagger_view(title='docs for tests')
-
 
 router = routers.DefaultRouter()
 
@@ -39,14 +41,16 @@ router.register(r'products/get', GetProductViewSet, basename='products_get')
 router.register(r'products/change', PutProductViewSet, basename='products_change')
 router.register(r'products/delete', DeleteProductViewSet, basename='products_delete')
 
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(router.urls)),
     path('export/', ExportAPIView.as_view()),
     path('chart/', ChartAPIView.as_view()),
-    #path('login', login, name="login_view"),
     path('authentification/', include('dj_rest_auth.urls')),
     path('authentification/registration/',include('dj_rest_auth.registration.urls')),
-    path('docs',schema_view)
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('api/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
+
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

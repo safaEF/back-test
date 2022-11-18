@@ -4,13 +4,14 @@ from api_back.pagination import CustomPagination
 from rest_framework import viewsets
 from django.contrib.auth.mixins import PermissionRequiredMixin
 
-
+from rest_framework.permissions import IsAuthenticated
 
 class GetProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     #pagination_class = CustomPagination
     http_method_names = ['get']
+    permission_classes = [IsAuthenticated]
     #permission_required = ('product.view_product')
 
 
