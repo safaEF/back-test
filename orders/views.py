@@ -4,20 +4,18 @@ from django.db import connection
 from rest_framework import viewsets
 from rest_framework.views import APIView
 from .serializers import OrderSerializer, OrderItemSerializer, Order, OrderItem
-from django.contrib.auth.mixins import PermissionRequiredMixin
 
 from api_back.pagination import CustomPagination
 from django.http import HttpResponse
 from rest_framework.response import Response
-from django.contrib.auth.decorators import permission_required
+from api_back.permissions import CustomDjangoModelPermissions
 
 
 class OrderItemViewSet(viewsets.ModelViewSet):
     queryset = OrderItem.objects.all()
     serializer_class = OrderItemSerializer
-    #permission_required = ('orders.view_orderitem', 'orders.create_orderitem', 'orders.change_orderitem', 'orders.delete_orderitem')
-
     #pagination_class = CustomPagination
+    permission_classes = (CustomDjangoModelPermissions,)
 
 
 
@@ -26,7 +24,7 @@ class GetOrderViewSet(viewsets.ModelViewSet):
     serializer_class = OrderSerializer
     #pagination_class = CustomPagination
     http_method_names = ['get']
-    #permission_required = ('orders.view_order')
+    permission_classes = (CustomDjangoModelPermissions,)
 
 
 class PostOrderViewSet(viewsets.ModelViewSet):
@@ -34,7 +32,7 @@ class PostOrderViewSet(viewsets.ModelViewSet):
     serializer_class = OrderSerializer
     #pagination_class = CustomPagination
     http_method_names = ['post']
-    #permission_required = ('orders.add_order')
+    permission_classes = (CustomDjangoModelPermissions,)
 
 
 class PutOrderViewSet(viewsets.ModelViewSet):
@@ -42,7 +40,7 @@ class PutOrderViewSet(viewsets.ModelViewSet):
     serializer_class = OrderSerializer
     #pagination_class = CustomPagination
     http_method_names = ['put']
-    #permission_required = ('orders.change_order')
+    permission_classes = (CustomDjangoModelPermissions,)
 
 
 class DeleteOrderViewSet(viewsets.ModelViewSet):
@@ -50,11 +48,10 @@ class DeleteOrderViewSet(viewsets.ModelViewSet):
     serializer_class = OrderSerializer
     #pagination_class = CustomPagination
     http_method_names = ['delete']
-    #permission_required = ('orders.delete_order')
+    permission_classes = (CustomDjangoModelPermissions,)
 
 
 
-#@permission_required('view_order')
 class ExportAPIView(APIView):
     def get(self):
         response = HttpResponse(content_type='text/csv')
@@ -71,7 +68,6 @@ class ExportAPIView(APIView):
         return  response
 
 
-#@permission_required('view_order')
 class ChartAPIView(APIView):
     def get(self, _):
         with connection.cursor() as cursor:
