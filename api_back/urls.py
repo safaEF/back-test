@@ -13,11 +13,12 @@ from django.conf.urls.static import static
 from product.views import *
 from .views import  *
 from orders.views import *
+from role.views import *
 
 router = routers.DefaultRouter()
 
 router.register(r'permissions/get', PermissionViewSet)
-#router.register(r'roles/get', RoleViewSet)
+# router.register(r'roles/get', RoleViewSet)
 #router.register(r'orders_items', OrderItemViewSet)
 
 router.register(r'groups/create', PostGroupViewSet, basename='groups_create')

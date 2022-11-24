@@ -3,6 +3,7 @@ from rest_framework import viewsets
 from .serializers import UserProfileSerializer, PermissionSerializer, GroupSerializer
 from django.contrib.auth.models import User, Permission, Group
 from api_back.permissions import CustomDjangoModelPermissions
+from api_back.pagination import CustomPagination
 
 
 class GetUserViewSet(viewsets.ModelViewSet):
@@ -11,8 +12,7 @@ class GetUserViewSet(viewsets.ModelViewSet):
     http_method_names = ['get']
     permission_classes = (CustomDjangoModelPermissions,)
     #pagination_class = CustomPagination
-    #required_groups = ['Admin']
-    # permission_required = ('user.view_user')
+
 
 class PostUserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
@@ -20,7 +20,7 @@ class PostUserViewSet(viewsets.ModelViewSet):
     http_method_names = ['post']
     permission_classes = (CustomDjangoModelPermissions,)
     #pagination_class = CustomPagination
-    #required_groups = ['Admin']
+
 
 class PutUserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
@@ -28,7 +28,6 @@ class PutUserViewSet(viewsets.ModelViewSet):
     http_method_names = ['put']
     permission_classes = (CustomDjangoModelPermissions,)
     # pagination_class = CustomPagination
-    # required_groups = ['Admin']
 
 
 class DeleteUserViewSet(viewsets.ModelViewSet):
@@ -36,7 +35,6 @@ class DeleteUserViewSet(viewsets.ModelViewSet):
     serializer_class = UserProfileSerializer
     http_method_names = ['delete']
     #pagination_class = CustomPagination
-    #required_groups = ['Admin']
     permission_classes = (CustomDjangoModelPermissions,)
 
 
@@ -46,20 +44,20 @@ class PermissionViewSet(viewsets.ModelViewSet):
     permission_classes = (CustomDjangoModelPermissions,)
 
 
-class GroupViewSet(viewsets.ModelViewSet):
-    queryset = Group.objects.all()
-    serializer_class = GroupSerializer
-    #pagination_class = CustomPagination
-    permission_classes = (CustomDjangoModelPermissions,)
+# class GroupViewSet(viewsets.ModelViewSet):
+#     queryset = Group.objects.all()
+#     serializer_class = GroupSerializer
+#     pagination_class = CustomPagination
+#     permission_classes = (CustomDjangoModelPermissions,)
 
 
 class GetGroupViewSet(viewsets.ModelViewSet):
-    queryset = Group.objects.all()
+    queryset = Group.objects.filter(name__group=)
     serializer_class = GroupSerializer
     http_method_names = ['get']
-    #pagination_class = CustomPagination
-    #required_groups = ['Admin']
+    # pagination_class = CustomPagination
     permission_classes = (CustomDjangoModelPermissions,)
+    
 
 
 class PostGroupViewSet(viewsets.ModelViewSet):
@@ -67,7 +65,7 @@ class PostGroupViewSet(viewsets.ModelViewSet):
     serializer_class = GroupSerializer
     http_method_names = ['post']
     #pagination_class = CustomPagination
-    #required_groups = ['Admin']
+
     permission_classes = (CustomDjangoModelPermissions,)
 
 
@@ -76,7 +74,7 @@ class PutGroupViewSet(viewsets.ModelViewSet):
     serializer_class = GroupSerializer
     http_method_names = ['put']
     #pagination_class = CustomPagination
-    #required_groups = ['Admin']
+
     permission_classes = (CustomDjangoModelPermissions,)
 
 
@@ -85,6 +83,6 @@ class DeleteGroupViewSet(viewsets.ModelViewSet):
     serializer_class = GroupSerializer
     http_method_names = ['delete']
     #pagination_class = CustomPagination
-    #required_groups = ['Admin']
+
     permission_classes = (CustomDjangoModelPermissions,)
 
