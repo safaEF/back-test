@@ -14,7 +14,7 @@ from api_back.permissions import CustomDjangoModelPermissions
 class OrderItemViewSet(viewsets.ModelViewSet):
     queryset = OrderItem.objects.all()
     serializer_class = OrderItemSerializer
-    pagination_class = CustomPagination
+    # pagination_class = CustomPagination
     permission_classes = (CustomDjangoModelPermissions,)
 
 
@@ -22,7 +22,7 @@ class OrderItemViewSet(viewsets.ModelViewSet):
 class GetOrderViewSet(viewsets.ModelViewSet):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
-    pagination_class = CustomPagination
+    # pagination_class = CustomPagination
     http_method_names = ['get']
     permission_classes = (CustomDjangoModelPermissions,)
 
@@ -30,7 +30,7 @@ class GetOrderViewSet(viewsets.ModelViewSet):
 class PostOrderViewSet(viewsets.ModelViewSet):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
-    pagination_class = CustomPagination
+    # pagination_class = CustomPagination
     http_method_names = ['post']
     permission_classes = (CustomDjangoModelPermissions,)
 
@@ -38,7 +38,7 @@ class PostOrderViewSet(viewsets.ModelViewSet):
 class PutOrderViewSet(viewsets.ModelViewSet):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
-    pagination_class = CustomPagination
+    # pagination_class = CustomPagination
     http_method_names = ['put']
     permission_classes = (CustomDjangoModelPermissions,)
 
@@ -46,7 +46,7 @@ class PutOrderViewSet(viewsets.ModelViewSet):
 class DeleteOrderViewSet(viewsets.ModelViewSet):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
-    pagination_class = CustomPagination
+    # pagination_class = CustomPagination
     http_method_names = ['delete']
     permission_classes = (CustomDjangoModelPermissions,)
 
