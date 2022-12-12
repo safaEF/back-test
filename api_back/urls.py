@@ -9,6 +9,7 @@ from django.contrib import admin
 from django.conf import settings
 from django.urls import path, include
 from django.conf.urls.static import static
+from historical.views import GetHistoricalViewSet
 
 from product.views import *
 from .views import  *
@@ -41,6 +42,8 @@ router.register(r'products/create', PostProductViewSet, basename='products_creat
 router.register(r'products/get', GetProductViewSet, basename='products_get')
 router.register(r'products/change', PutProductViewSet, basename='products_change')
 router.register(r'products/delete', DeleteProductViewSet, basename='products_delete')
+
+router.register(r'historical/get', GetHistoricalViewSet, basename='historical_get')
 
 urlpatterns = [
     path('admin/', admin.site.urls),

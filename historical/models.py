@@ -10,5 +10,7 @@ class Historical(models.Model):
     model = models.CharField(max_length=255, null=True, blank=True)
     action = models.CharField(max_length=255, null=True, blank=True)
     time = models.DateTimeField(auto_now_add=True)
+    
+    
     def __str__(self):
         return "%s" % (self.user)
