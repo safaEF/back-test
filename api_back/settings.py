@@ -43,8 +43,10 @@ INSTALLED_APPS = [
     'product',
     'role',
     'orders',
+    'historical',
     
 ]
+
 
 SITE_ID = 1
 
