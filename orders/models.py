@@ -1,8 +1,4 @@
 from django.db import models
-from django.contrib.auth.models import User
-from django.db.models.signals import post_save
-
-
 
 
 class OrderItem(models.Model):
@@ -14,13 +10,6 @@ class OrderItem(models.Model):
 
     def __str__(self):
         return "%s" % (self.product_title)
-
-def create_orderitem(sender, instance, created, **kwargs):   
-        OrderItem.objects.create(product_title=instance)
-        print('OrderItem created!')
-post_save.connect(create_orderitem, sender=User)
-
-
 
 
 class Order(models.Model):
