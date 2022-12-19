@@ -21,7 +21,7 @@ def update_product(sender, instance, **kwargs):
                 print('Prod_obj', Prod_obj)
                 print('instance', instance.title)
                 print('fields', fields)
-                Historical.objects.create(model="Product", action="Post", pre=getattr(Prod_obj,field), post=getattr(instance,field), field_updated=field)
+                Historical.objects.create(model="Product", action="Put", pre=getattr(Prod_obj,field), post=getattr(instance,field), field_updated=field)
 
 
 

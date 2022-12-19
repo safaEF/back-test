@@ -20,7 +20,7 @@ def update_Order(sender, instance, **kwargs):
                 print('obj', obj)
                 print('instance', instance)
                 print('fields', fields)
-                Historical.objects.create(model="Order", action="Post", pre=getattr(obj,field), post=getattr(instance,field), field_updated=field)
+                Historical.objects.create(model="Order", action="Put", pre=getattr(obj,field), post=getattr(instance,field), field_updated=field)
 
 
 
