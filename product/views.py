@@ -40,20 +40,3 @@ class DeleteProductViewSet(viewsets.ModelViewSet):
     # pagination_class = CustomPagination
     http_method_names = ['delete']
     permission_classes = (CustomDjangoModelPermissions,)
-
-class FileUploadView(APIView):
-    permission_classes = [AllowAny]
-    parser_classes = (MultiPartParser, )
-
-    def post(self, request, *args, **kwargs):
-
-      file_serializer = ProductSerializer(data=request.data)
-
-      if file_serializer.is_valid():
-
-        file = request.FILES['image']
-        file_serializer.save()
-        url = default_storage.url(file)
-        return Response({"url": 'http://127.0.0.1:8000'+url, "data":file_serializer.data},  status=status.HTTP_201_CREATED)
-      else:
-          return Response(file_serializer.errors, status=status.HTTP_400_BAD_REQUEST)

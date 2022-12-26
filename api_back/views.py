@@ -48,7 +48,7 @@ class GetGroupViewSet(viewsets.ModelViewSet):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
     http_method_names = ['get']
-    # pagination_class = CustomPagination
+    pagination_class = CustomPagination
     permission_classes = (CustomDjangoModelPermissions,)
     
 

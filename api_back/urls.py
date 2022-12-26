@@ -52,7 +52,6 @@ urlpatterns = [
     path('', include(router.urls)),
     path('export/', ExportAPIView.as_view()),
     path('chart/', ChartAPIView.as_view()),
-    path('upload/', FileUploadView.as_view()),
     path('authentification/', include('dj_rest_auth.urls')),
     path('authentification/registration/',include('dj_rest_auth.registration.urls')),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),

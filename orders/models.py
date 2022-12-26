@@ -27,5 +27,3 @@ class Order(models.Model):
     @property
     def name(self):
         return self.first_name + '' + self.last_name
-
-    

@@ -6,7 +6,6 @@ from api_back.permissions import CustomDjangoModelPermissions
 
 
 # Create your views here.
-
 class GetHistoricalViewSet(viewsets.ModelViewSet):
     queryset = Historical.objects.all()
     serializer_class = HistoricalSerializer
