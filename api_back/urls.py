@@ -5,6 +5,7 @@ from rest_framework_simplejwt.views import (
     TokenVerifyView
 )
 from rest_framework import routers
+from rest_framework_swagger.views import get_swagger_view
 from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
@@ -16,6 +17,7 @@ from product.views import *
 from .views import  *
 from orders.views import *
 from role.views import *
+schema_view = get_swagger_view(title='docs for tests')
 
 router = routers.DefaultRouter()
 
@@ -57,6 +59,7 @@ urlpatterns = [
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('api/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
+    path('docs',schema_view),
     
     
 

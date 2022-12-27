@@ -14,7 +14,7 @@ SECRET_KEY = 'django-insecure-d7v8^8o)k$a0b%kh)ftm+w=3kkgz=s@=w*%g9j624v85u2*@-j
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'dj_rest_auth.registration',
     'django_filters',
     'corsheaders',
+    'rest_framework_swagger',
 
     'product',
     'role',
@@ -75,6 +76,8 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+            'libraries' : {
+                'staticfiles': 'django.templatetags.static', }
         },
     },
 ]
@@ -128,6 +131,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
+MEDIA_URL='/media/'
+MEDIA_ROOT='/mediafolder/'
+STATIC_ROOT='/staticfolder/' 
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
@@ -145,6 +151,7 @@ REST_AUTH_REGISTER_SERIALIZERS = {
 }
 
 REST_FRAMEWORK = {
+    'DEFAULT_SCHEMA_CLASS':'rest_framework.schemas.coreapi.AutoSchema',
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
 
     'DEFAULT_AUTHENTICATION_CLASSES': (
@@ -153,17 +160,12 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated',
-        'rest_framework.permissions.DjangoModelPermissions',
+        # 'rest_framework.permissions.IsAuthenticated',
+        # 'rest_framework.permissions.DjangoModelPermissions',
+        'rest_framework.permissions.AllowAny',
     ],
 }
 
-#REST_USE_JWT = True
-
-#JWT_AUTH_COOKIE = 'my-app-auth'
-#JWT_AUTH_REFRESH_COOKIE = 'my-refresh-token'
-
-#JWT_AUTH = {'JWT_ALLOW_REFRESH': True}
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -213,4 +215,9 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_EMAIL_VERIFICATION = 'True'
 
+SWAGGER_SETTINGS = {
 
+    'JSON_EDITOR':True,
+    'SHOW_REQUEST_HEADERS':True
+
+} 
